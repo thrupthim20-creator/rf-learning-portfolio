@@ -5,7 +5,7 @@ from scipy import signal as sp
 fs = 1000
 t = np.arange(0, 1, 1/fs)
 
-f = 100
+f = 50
 sig = np.sin(2*np.pi*f*t)
 noise = np.random.randn(len(t)) * 0.5
 

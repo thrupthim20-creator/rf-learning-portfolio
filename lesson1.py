@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 fs = 1000
 t = np.arange(0, 1, 1/fs)
 
-f = 100
-sig =np.sin(2*np.pi*f*t)
+f = 50
+sig =np.sin(2*np.pi*f*t) #clean signal
 
 plt.figure(figsize=(10, 5))
 plt.plot(t[:200], sig[:200])
 plt.xlabel("time")
-plt.ylabel("sine wave")
+plt.ylabel("sine wave @ 50Hz")
 plt.grid()
 plt.tight_layout()
 plt.show()
@@ -21,7 +21,7 @@ plt.show()
 # What would happen if you changed f = 50 to f = 200? Try it.
 
 noise = np.random.randn(len(t)) * 0.5 #Gaussian noise
-noisy_sig = sig + noise
+noisy_sig = sig + noise #noisy signal
 
 plt.figure(figsize=(10,5))
 plt.plot(t[:200], noisy_sig[:200])
@@ -55,6 +55,6 @@ plt.grid()
 plt.tight_layout()
 plt.show()
 
-#frequesncy space = 1/fs ?
+#frequency space = 1/fs ?
 #abs(fft) ?
 #negative frequency?
