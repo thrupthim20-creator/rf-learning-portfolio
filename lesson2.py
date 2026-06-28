@@ -1,0 +1,52 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal as sp
+
+fs = 1000
+t = np.arange(0, 1, 1/fs)
+
+f = 100
+sig = np.sin(2*np.pi*f*t)
+noise = np.random.randn(len(t)) * 0.5
+
+noisy = sig + noise
+
+numtaps = 11
+cutoff = 100
+
+filter = sp.firwin(numtaps, cutoff, fs=fs)
+filtered = sp.lfilter(filter, 2, noisy)
+
+plt.figure(figsize=(10,4))
+plt.plot(t[:200], sig[:200], label = "clean")
+plt.plot(t[:200], noisy[:200], label = "noisy")
+plt.plot(t[:200], filtered[:200], label = "filtered")
+plt.xlabel("time")
+plt.ylabel("amplitude")
+plt.title("clean, noisy and filtered signal")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+fft = np.fft.fft(sig)
+fft_n = np.fft.fft(noisy)
+fft_filtered = np.fft.fft(filtered)
+
+freq = np.fft.fftfreq(len(t), 1/fs)
+
+plt.figure(figsize=(10,4))
+plt.plot(freq, np.abs(fft), label ="clean")
+plt.plot(freq, np.abs(fft_n), label="noisy")
+plt.plot(freq, np.abs(fft_filtered), label = "filtered")
+plt.xlabel("frequency")
+plt.ylabel("magnitude")
+plt.grid(True)
+plt.tight_layout()
+plt.legend()
+plt.show()
+
+
+
+
+
